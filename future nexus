@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Future Nexus — Learn & Launch (Hackathon Edition) Updated</title>
+  <!-- Grander Effects Start: Added Google Fonts and Font Awesome for icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Grander Effects End -->
+  <style>
+    :root{
+      --bg:#f6f7fb; --card:#ffffff; --muted:#6b7280; --accent:#1e40af; --accent-2:#2563eb; --glass:rgba(255,255,255,0.7);
+      --radius:16px; --shadow:0 10px 30px rgba(16,24,40,0.1);
+      --font-base: 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    body.dark-mode {
+      --bg: #0f172a; --card: #1f2937; --muted: #9ca3af;
+      --accent: #3b82f6; --accent-2: #60a5fa; --glass:rgba(31, 41, 55, 0.7);
+      color: #f9fafb;
+    }
+    *{box-sizing:border-box}
+
+    /* Grander Effect: Animated gradient background */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body {
+      margin:0; 
+      font-family: var(--font-base);
+      color:#0f172a;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.4s, color 0.4s;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    body.dark-mode {
+      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1f2937);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    /* End Animated Background */
+
+    /* Grander Effect: Page Load Animations */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    /* End Animations */
+
+    body.dark-mode .card, body.dark-mode header {
+      background: var(--card);
+      color: #f9fafb;
+    }
+    body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode label {
+        color: var(--accent-2);
+    }
+    body.dark-mode input, body.dark-mode select, body.dark-mode textarea {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    body.dark-mode .course-row {
+      border-color: #374151;
+    }
+    body.dark-mode .course-row:hover {
+        box-shadow: 0 8px 25px rgba(96, 165, 250, 0.25);
+    }
+    body.dark-mode .notes, body.dark-mode .plan {
+        background: #1e293b;
+        color: #e5e7eb;
+        border-left-color: var(--accent-2);
+    }
+    a{color:var(--accent-2);text-decoration:none; transition: color 0.3s ease;}
+    a:hover { color: var(--accent); }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 18px;
+    }
+    /* Grander Effect: Sticky, glassmorphism header */
+    header {
+      display:flex; align-items:center; justify-content: space-between; gap:12px;
+      padding: 12px 24px;
+      position: sticky;
+      top: 16px;
+      z-index: 1000;
+      border-radius: var(--radius);
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow);
+      margin-top: 16px;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    .brand {
+      display:flex; align-items:center; gap: 12px;
+      font-weight: 800; font-size: 20px;
+    }
+    .logo {
+      background: none; padding: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .logo img {
+      height: 40px; width: auto; border-radius: 8px;
+    }
+    .site-name {
+      user-select:none; margin-left: 6px; font-weight: 700; color: var(--accent-2);
+    }
+    #menuWrapper { position: relative; }
+    #menuBtn {
+      font-size: 22px; padding: 8px 12px; background: transparent; border: none; color: var(--accent-2); cursor: pointer; user-select:none; border-radius: var(--radius); transition: all 0.3s ease;
+    }
+    #menuBtn:hover {
+      background: var(--accent-2); color: white; transform: rotate(180deg);
+    }
+    #profileBtn {
+      background:none; border:none; cursor:pointer; border-radius:50%; overflow:hidden; width:42px; height:42px; padding:0;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2); transition: all 0.3s ease; border: 2px solid var(--accent-2);
+    }
+    #profileBtn:hover {
+      box-shadow: 0 0 16px var(--accent); transform: scale(1.1);
+    }
+    #profileImg {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    #userWelcome {
+      color: var(--muted); font-size: 14px; user-select:none; margin-left: 10px;
+    }
+    main {
+      margin-top: 30px;
+    }
+    /* Grander Effect: Animated cards with better shadows and hover effect */
+    .card {
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      animation: slideUp 0.6s ease-out forwards;
+      animation-delay: 0.2s;
+      opacity: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(16,24,40,0.15);
+    }
+    h2, h3, h4 {
+      margin-top: 0; margin-bottom: 16px; font-weight: 700; color: var(--accent-2);
+    }
+    h4 {
+      font-size: 18px;
+    }
+    .course-row {
+      display: flex; align-items: center; gap: 20px; border: 1px solid #eef2ff; padding: 12px 16px; border-radius: 12px; margin-bottom: 12px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .course-row:hover {
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.2); transform: scale(1.02);
+    }
+    .thumb {
+      width: 150px; height: 90px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: white;
+      font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 18px; user-select:none;
+    }
+    .course-info { flex-grow: 1; }
+    .course-meta { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    
+    /* Grander Effect: Gradient buttons with hover animation */
+    .enroll-btn, .step-btn {
+      background: linear-gradient(45deg, var(--accent-2), var(--accent));
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      letter-spacing: 0.5px;
+    }
+    .enroll-btn:disabled, .enroll-btn[disabled], .step-btn:disabled {
+      background: #94a3b8; cursor: not-allowed; box-shadow: none;
+    }
+    .enroll-btn:hover:not(:disabled), .step-btn:hover:not(:disabled) {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    input[type="text"], input[type="email"], input[type="password"], select, textarea {
+      width: 100%; padding: 12px; font-size: 15px; border: 1.5px solid #cbd5e1; border-radius: 10px;
+      transition: all 0.3s ease; background: var(--bg); color: inherit;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, select:focus, textarea:focus {
+      outline: none; border-color: var(--accent-2);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+    }
+    label { font-weight: 600; margin-bottom: 6px; display: block; color: var(--accent-2); }
+    
+    /* Grander Effect: Step animation */
+    #onboardingForm > * {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+    .step-container { max-width: 600px; margin: auto; }
+    .steps-nav { display: flex; justify-content: space-between; margin-top: 16px; }
+    
+    .notes, .plan {
+      background: #f0f9ff; border-left: 5px solid var(--accent-2); padding: 16px; margin-top: 20px; border-radius: 10px; white-space: pre-wrap; font-size: 14px; color: #1e293b;
+    }
+    ol.plan-list { padding-left: 20px; margin-top: 10px; }
+    ol.plan-list li { margin-bottom: 10px; }
+    .resource-card { background: #e0e7ff; border-radius: 10px; padding: 16px; margin-top: 20px; }
+    #accessArea h2, #accessArea h3 { color: var(--accent); }
+    #accessArea > div { margin-bottom: 32px; }
+    /* Grander Effect: Animated modal popup */
+    #modalRoot > div { user-select:none; }
+    #modalRoot .card {
+        animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        backdrop-filter: blur(10px);
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    body.dark-mode #modalRoot .card {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer {
+      text-align: center; font-size: 14px; margin-top: 40px; color: var(--muted); user-select:none;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    }
+    body.dark-mode footer { color: #aaa; }
+
+    .switch{position:relative;display:inline-block;width:50px;height:28px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#ccc;transition:.4s;border-radius:34px}.slider:before{position:absolute;content:"";height:20px;width:20px;left:4px;bottom:4px;background-color:white;transition:.4s;border-radius:50%}input:checked+.slider{background-color:var(--accent-2)}input:checked+.slider:before{transform:translateX(22px)}
+    
+    .final-menu-layout { display: flex; gap: 24px; flex-wrap: wrap; }
+    .final-menu-sidebar {
+      flex: 1 1 200px; border-right: 1px solid #eee; padding-right: 20px;
+    }
+    body.dark-mode .final-menu-sidebar { border-right-color: #4b5563; }
+    .final-menu-sidebar h4 {
+      font-size: 16px; color: var(--accent); border-bottom: 2px solid var(--accent-2); padding-bottom: 5px; margin-top: 0; margin-bottom: 10px;
+    }
+    .final-menu-sidebar > div { margin-bottom: 20px; }
+    body.dark-mode .final-menu-sidebar h4 { color: var(--accent-2); }
+    .final-menu-sidebar ul { list-style: none; padding: 0; margin: 0; }
+    .final-menu-sidebar li a, .final-menu-sidebar li span {
+      display: flex; align-items: center; gap: 8px; padding: 8px 0; color: var(--muted); font-weight: 500; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .final-menu-sidebar li a:hover { color: var(--accent-2); transform: translateX(5px); }
+    body.dark-mode .final-menu-sidebar li a:hover { color: #fff; }
+    .final-menu-main { flex: 2 1 400px; min-width: 0; }
+    .tab-menu-container { display: flex; border-bottom: 2px solid #ddd; flex-wrap: wrap; }
+    body.dark-mode .tab-menu-container { border-bottom-color: #4b5563; }
+    .tab-menu-btn {
+      padding: 10px 15px; cursor: pointer; border: none; background: transparent; font-weight: 600; color: var(--muted);
+      border-bottom: 3px solid transparent; transition: color 0.3s, border-bottom-color 0.3s; position:relative;
+    }
+    .tab-menu-btn.active, .tab-menu-btn:hover { color: var(--accent-2); border-bottom-color: var(--accent-2); }
+    .tab-content { display: none; padding-top: 20px; animation: fadeIn 0.5s; }
+    .tab-content.active { display: block; }
+
+    .stat-cards { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+    .stat-card { background: var(--bg); padding: 15px; border-radius: var(--radius); flex: 1; min-width: 150px; text-align: center; transition: all 0.3s ease; border: 1px solid transparent;}
+    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: var(--accent-2); }
+    .stat-card h5 { margin: 0 0 5px 0; color: var(--muted); font-size: 14px;}
+    .stat-card p { margin: 0; font-size: 24px; font-weight: 700; }
+    .progress-bar { width: 100%; background-color: #e0e0e0; border-radius: 5px; overflow: hidden; }
+    .progress-bar div { height: 10px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 5px; transition: width 0.5s ease-in-out;}
+    .badge-container { display:flex; gap: 10px; font-size: 24px; }
+    .upload-box { border: 2px dashed var(--muted); border-radius: var(--radius); padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;}
+    .upload-box:hover { border-color: var(--accent-2); background: var(--bg); color: var(--accent-2); }
+    .code-display-box { background: var(--bg); border-left: 4px solid var(--accent); padding: 15px; border-radius: 8px; white-space: pre-wrap; font-family: 'Fira Code', monospace; max-height: 400px; overflow-y: auto;}
+    .pdf-list a { display: block; padding: 10px; border-radius: 8px; background: var(--bg); margin-bottom: 8px; font-weight: 600; transition: background-color 0.3s, color 0.3s, transform 0.3s; }
+    .pdf-list a:hover { background: var(--accent); color: white; transform: translateX(5px); }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div id="menuWrapper">
+        <button id="menuBtn" title="Open Menu"><i class="fas fa-ellipsis-v"></i></button>
+      </div>
+      <div class="brand">
+        <div class="logo">
+          <!-- Replaced logo with a placeholder for reliable rendering -->
+          <img src="https://placehold.co/100x40/3b82f6/FFFFFF?text=FN&font=poppins" alt="Future Nexus Logo" />
+        </div>
+        <div class="site-name">Future Nexus</div>
+      </div>
+      <div style="display:flex; align-items:center; gap: 12px;">
+        <span id="userWelcome"></span>
+        <button class="enroll-btn" id="btn-signin" style="background:var(--muted)">Sign in</button>
+        <button class="enroll-btn" id="btn-join">Join (Free)</button>
+        <button id="profileBtn" title="View Profile" aria-label="View Profile">
+          <!-- Replaced avatar with a placeholder for reliable rendering -->
+          <img id="profileImg" src="https://placehold.co/42x42/eeeeee/333333?text=A" alt="Profile" />
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section id="onboardingArea" class="card step-container" style="display:none;">
+        <h3>Personalized Onboarding</h3>
+        <form id="onboardingForm"></form>
+      </section>
+
+      <section class="card" id="coursesArea" style="display:none;">
+        <h2>All Courses — Free</h2>
+        <div id="courseList"></div>
+      </section>
+    </main>
+
+    <footer>
+      © <strong>Future Nexus</strong> • All courses free — Hackathon demo
+    </footer>
+  </div>
+
+  <div id="modalRoot"></div>
+
+  <script>
+    // Sample data
+    const COURSES = [
+      { id:'c1', title:'Crash Course: Programming Basics', instructor:'A. Sharma', category:'cs', level:'beginner', duration:'4h', price:'Free', desc:'Variables, loops, functions + mini project.'},
+      { id:'c2', title:'Maths Refresher for Engineers', instructor:'R. Patel', category:'math', level:'beginner', duration:'6h', price:'Free', desc:'Algebra & calculus essentials with practice.'},
+      { id:'c3', title:'Intro to Electronics', instructor:'S. Verma', category:'ece', level:'beginner', duration:'5h', price:'Free', desc:'Circuits basics, components, simple labs.'},
+      { id:'c4', title:'Data Structures Essentials', instructor:'M. Rao', category:'cs', level:'intermediate', duration:'12h', price:'Free', desc:'Arrays, lists, stacks, queues and practice problems.'},
+      { id:'c5', title:'Basic CAD for Mechanical', instructor:'P. Singh', category:'me', level:'beginner', duration:'7h', price:'Free', desc:'Intro to CAD modeling and projects.'},
+      { id:'c6', title:'Digital Logic Fundamentals', instructor:'L. Kaur', category:'ece', level:'intermediate', duration:'9h', price:'Free', desc:'Boolean algebra, gates, flip-flops.'}
+    ];
+
+    const COURSE_RESOURCES = {
+      c1: { videos: [ { title: "Programming Basics - Video 1", url: "https://www.youtube.com/embed/k6U-i4gXkLM" }, { title: "Variables and Loops", url: "https://www.youtube.com/embed/8OKTAedgFYg" } ], notes: "This course covers variables, loops, and functions. Practice coding along with video tutorials." },
+      c2: { videos: [ { title: "Algebra Essentials", url: "https://www.youtube.com/embed/f8X0jPWAdeQ" }, { title: "Calculus Basics", url: "https://www.youtube.com/embed/8GOn4AOc5X4" } ], notes: "Review of key algebra and calculus concepts for engineers." },
+      c3: { videos: [ { title: "Basic Electronics Circuits", url: "https://www.youtube.com/embed/ZIqkiVa71KY" } ], notes: "Introduction to circuits, components, and simple hands-on labs." },
+      c4: { videos:[ { title:"Data Structures Intro", url:"https://www.youtube.com/embed/sVxBVvlnJsM"} ], notes: "Learn fundamental data structures like arrays and stacks." },
+      c5: { videos: [ { title: "Intro to CAD", url: "https://www.youtube.com/embed/aG1PlcXCzF0" } ], notes: "Basic CAD concepts and hands-on projects." },
+      c6: { videos: [ { title: "Digital Logic Basics", url: "https://www.youtube.com/embed/IBlOa9ytYcw" } ], notes: "Understand Boolean algebra, gates, and flip-flops." },
+    };
+
+    // User management
+    function getCurrentUser(){
+      try{ return JSON.parse(localStorage.getItem('fn_user')); }catch(e){ return null; }
+    }
+    function setCurrentUser(u){ localStorage.setItem('fn_user', JSON.stringify(u)); updateUserUI(); }
+    function logout(){ localStorage.removeItem('fn_user'); updateUserUI(); }
+
+    // UI Elements
+    const userWelcome = document.getElementById('userWelcome');
+    const btnSignIn = document.getElementById('btn-signin');
+    const btnJoin = document.getElementById('btn-join');
+    const onboardingArea = document.getElementById('onboardingArea');
+    const onboardingForm = document.getElementById('onboardingForm');
+    const coursesArea = document.getElementById('coursesArea');
+    const courseList = document.getElementById('courseList');
+    
+    let onboardingData = { year: null, type: null, branch: null, language: null };
+    let currentStep = 0;
+    const steps = ['year', 'type', 'branch', 'language', 'summary'];
+
+    function updateUserUI(){
+      const user = getCurrentUser();
+      const profileImg = document.getElementById('profileImg');
+      if(user) {
+        userWelcome.innerText = `Hi, ${user.name || user.email.split('@')[0]}`;
+        btnSignIn.innerText = 'Account';
+        btnJoin.innerText = 'Logout';
+        btnJoin.onclick = () => {
+          showCustomConfirm('Are you sure you want to logout?', logoutAndReset);
+        };
+        btnSignIn.onclick = () => showProfileModal();
+        profileImg.src = `https://placehold.co/42x42/60a5fa/FFFFFF?text=${(user.name || user.email)[0].toUpperCase()}`;
+        showOnboardingArea();
+        showCourses();
+      } else {
+        userWelcome.innerText = '';
+        btnSignIn.innerText = 'Sign in';
+        btnJoin.innerText = 'Join (Free)';
+        btnJoin.onclick = () => showJoin();
+        btnSignIn.onclick = () => showSignIn();
+        profileImg.src = `https://placehold.co/42x42/eeeeee/333333?text=A`;
+        hideOnboardingArea();
+        hideCourses();
+        hideAccessArea();
+      }
+    }
+
+    function logoutAndReset(){
+      logout();
+      onboardingData = {year:null,type:null,branch:null,language:null};
+      currentStep = 0;
+      clearOnboardingForm();
+      hideOnboardingArea();
+      hideCourses();
+      hideAccessArea();
+      closeModal();
+    }
+    
+    function showOnboardingArea(){
+      onboardingArea.style.display = 'block';
+      currentStep = 0;
+      onboardingData = {year:null,type:null,branch:null,language:null};
+      renderStep();
+    }
+    function hideOnboardingArea(){
+      onboardingArea.style.display = 'none';
+    }
+    function showCourses(){
+      coursesArea.style.display = 'block';
+      renderCoursesList();
+    }
+    function hideCourses(){
+      coursesArea.style.display = 'none';
+    }
+    function clearOnboardingForm(){
+      onboardingForm.innerHTML = '';
+    }
+
+    function renderStep(){
+      clearOnboardingForm();
+      switch(steps[currentStep]){
+        case 'year': renderYearStep(); break;
+        case 'type': renderTypeStep(); break;
+        case 'branch': renderBranchStep(); break;
+        case 'language': renderLanguageStep(); break;
+        case 'summary': renderSummaryStep(); break;
+      }
+    }
+
+    function renderYearStep(){
+      onboardingForm.innerHTML = `
+        <h4>What is your current year of study?</h4>
+        <div class="input-group"> <label for="yearSelect">Choose Year</label> <select id="yearSelect" required> <option value="" disabled selected>Select year</option> <option value="1">1st Year</option> <option value="2">2nd Year</option> <option value="3">3rd Year</option> <option value="4">4th Year</option> <option value="other">Other</option> </select> </div>
+        <div class="steps-nav"> <button type="button" class="step-btn" disabled>Back</button> <button type="submit" class="step-btn">Next <i class="fas fa-arrow-right"></i></button> </div>`;
+      onboardingForm.onsubmit = function(e){
+        e.preventDefault();
+        const yearEl = document.getElementById('yearSelect');
+        if(yearEl.value){
+          onboardingData.year = yearEl.value;
+          currentStep++;
+          renderStep();
+        } else { showCustomAlert('Please select a year'); }
+      }
+    }
+
+    function renderTypeStep(){
+      onboardingForm.innerHTML = `
+        <h4>Are you a B.Tech student or have you passed Intermediate?</h4>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:24px;"> <button type="button" class="enroll-btn" data-type="btech">B.Tech Student</button> <button type="button" class="enroll-btn" data-type="intermediate" style="background:var(--muted)">Intermediate Passed</button> </div>
+        <div class="steps-nav"> <button type="button" class="step-btn" id="backBtn"><i class="fas fa-arrow-left"></i> Back</button> <div style="width:110px"></div> </div>`;
+      document.querySelectorAll('[data-type]').forEach(btn => {
+        btn.onclick = function(){
+          onboardingData.type = this.getAttribute('data-type');
+          currentStep++;
+          renderStep();
+        }
+      });
+      document.getElementById('backBtn').onclick = function(){ currentStep--; renderStep(); }
+    }
+
+    function renderBranchStep(){
+      onboardingForm.innerHTML = `
+        <h4>Which branch are you choosing?</h4>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;"> <button type="button" class="enroll-btn" data-branch="cs">CSE</button> <button type="button" class="enroll-btn" data-branch="ece">ECE</button> <button type="button" class="enroll-btn" data-branch="ce">Civil</button> <button type="button" class="enroll-btn" data-branch="me">Mechanical</button> <button type="button" class="enroll-btn" data-branch="ee">Electrical</button> </div>
+        <div class="steps-nav"> <button type="button" class="step-btn" id="backBtn"><i class="fas fa-arrow-left"></i> Back</button> <div style="width:110px"></div> </div>`;
+      document.querySelectorAll('.enroll-btn[data-branch]').forEach(btn => {
+        btn.onclick = function(){
+          onboardingData.branch = this.getAttribute('data-branch');
+          currentStep++;
+          renderStep();
+        }
+      });
+      document.getElementById('backBtn').onclick = function(){ currentStep--; renderStep(); }
+    }
+
+    function renderLanguageStep(){
+      if(onboardingData.branch !== 'cs'){ currentStep++; renderStep(); return; }
+      onboardingForm.innerHTML = `
+        <h4>Choose a programming language to learn</h4>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;"> <button type="button" class="enroll-btn" data-lang="python">Python</button> <button type="button" class="enroll-btn" data-lang="cpp">C / C++</button> <button type="button" class="enroll-btn" data-lang="java">Java</button> <button type="button" class="enroll-btn" data-lang="js">JavaScript</button> </div>
+        <div class="steps-nav"> <button type="button" class="step-btn" id="backBtn"><i class="fas fa-arrow-left"></i> Back</button> <div style="width:110px"></div> </div>`;
+      document.querySelectorAll('.enroll-btn[data-lang]').forEach(btn => {
+        btn.onclick = function(){
+          onboardingData.language = this.getAttribute('data-lang');
+          currentStep++;
+          renderStep();
+        }
+      });
+      document.getElementById('backBtn').onclick = function(){ currentStep--; renderStep(); }
+    }
+
+    function renderSummaryStep(){
+      const user = getCurrentUser();
+      if(!user){ showCustomAlert('Session expired, please sign in again'); logoutAndReset(); return; }
+      clearOnboardingForm();
+      onboardingForm.innerHTML = `
+        <h4>Hi ${user.name || user.email.split('@')[0]}, here is your personalized plan and resources</h4>
+        <div class="notes"> <strong><i class="fas fa-lightbulb"></i> Notes & Key Concepts</strong> <p>${generateNotes()}</p> </div>
+        <div class="plan"> <strong><i class="fas fa-calendar-alt"></i> Weekly Plan</strong> <ol class="plan-list"> ${generatePlan().map(item => `<li>${item}</li>`).join('')} </ol> </div>
+        <div class="resource-card" style="background: var(--bg); color: inherit;"> <strong><i class="fas fa-graduation-cap"></i> Suggested Courses for You</strong> <div style="margin-top:10px;" id="suggestedCourses"></div> </div>
+        <div class="steps-nav" style="margin-top:24px; justify-content: flex-end;"> <button type="button" class="step-btn" id="backBtn"><i class="fas fa-arrow-left"></i> Back</button> </div>`;
+      document.getElementById('backBtn').onclick = function(){ currentStep--; renderStep(); };
+      showSuggestedCourses();
+    }
+    
+    function generateNotes(){
+      if(onboardingData.branch === 'cs'){
+        if(onboardingData.language === 'python'){ return `Why Python? Easy syntax, great for beginners, widely used in ML & web development.\nKey topics:\n- Variables & Data Types\n- Control Flow & Loops\n- Functions & Modules\n- Lists & Dictionaries\n- Basic File I/O`; }
+        if(onboardingData.language === 'cpp'){ return `Why C/C++? Strong for memory management, widely used in competitive programming.\nKey topics:\n- Syntax & Compilation\n- Pointers & Memory\n- Structures & OOP Basics\n- STL basics (vector, string)`; }
+        if(onboardingData.language === 'java'){ return `Why Java? Strongly typed, object-oriented, used in enterprise and Android.\nKey topics:\n- OOP Fundamentals\n- Classes & Objects\n- Collections Framework\n- Exception Handling`; }
+        if(onboardingData.language === 'js'){ return `Why JavaScript? Frontend and full-stack with Node.js.\nKey topics:\n- DOM and Events\n- Functions and Async Basics\n- ES6 Features (let, const, arrow functions)`; }
+        return 'General Computer Science foundational notes.';
+      }
+      switch(onboardingData.branch) {
+        case 'ece': return `Focus on circuits, components, signals & systems.\nHands-on: Build simple circuits with resistors and LEDs.`;
+        case 'me': return `Basics of engineering drawing, CAD modeling, mechanics fundamentals.`;
+        case 'ce': return `Introduction to surveying, construction materials, and structural basics.`;
+        case 'ee': return `Basics of power systems, circuit analysis, and control systems.`;
+        default: return 'Core foundational engineering concepts.';
+      }
+    }
+
+    function generatePlan(){
+      if(onboardingData.branch === 'cs'){
+        return [ `Week 1 — Basics: syntax, variables, control structures in ${onboardingData.language.toUpperCase()}`, 'Week 2 — Data Structures: arrays, lists, strings', 'Week 3 — Algorithms: sorting, searching, simple problems', 'Week 4 — Mini project & revision' ];
+      }
+      return [ 'Week 1 — Fundamentals and key concepts', 'Week 2 — Hands-on problems and exercises', 'Week 3 — Mini project or lab work', 'Week 4 — Revision & mock test or presentation' ];
+    }
+
+    function showSuggestedCourses(){
+      const container = document.getElementById('suggestedCourses');
+      container.innerHTML = '';
+      const matches = COURSES.filter(c => c.category === onboardingData.branch || (onboardingData.branch === 'cs' && c.category === 'cs'));
+      matches.forEach(course => {
+        const div = document.createElement('div');
+        div.style.marginBottom = '14px';
+        div.innerHTML = `<strong>${course.title}</strong> <div style="font-size:13px; color: var(--muted); margin: 4px 0;">${course.desc}</div> <button class="enroll-btn" onclick="enrollCourse('${course.id}')">Enroll (Free)</button>`;
+        container.appendChild(div);
+      });
+    }
+
+    function enrollCourse(id){
+      const user = getCurrentUser();
+      if(!user){ showCustomAlert('Please sign in to enroll'); return; }
+      const enrolled = JSON.parse(localStorage.getItem('fn_enrolled_'+user.email) || '[]');
+      if(!enrolled.includes(id)){
+        enrolled.push(id);
+        localStorage.setItem('fn_enrolled_'+user.email, JSON.stringify(enrolled));
+        showCustomAlert('Enrolled in course: ' + COURSES.find(c=>c.id === id).title, 'success');
+        renderCoursesList();
+        updateAccessArea();
+      } else { showCustomAlert('Already enrolled in this course.', 'info'); }
+    }
+
+    function renderCoursesList(){
+      const user = getCurrentUser();
+      const enrolled = user ? JSON.parse(localStorage.getItem('fn_enrolled_'+user.email) || '[]') : [];
+      courseList.innerHTML = '';
+      COURSES.forEach(c => {
+        const isEnrolled = enrolled.includes(c.id);
+        const row = document.createElement('div');
+        row.className = 'course-row';
+        row.innerHTML = `<div class="thumb">${c.category.toUpperCase()}</div> <div class="course-info"> <div style="display:flex;justify-content:space-between;align-items:center"> <div> <div style="font-weight:800">${c.title}</div> <div class="course-meta">by ${c.instructor} • ${c.duration} • ${c.level}</div> </div> <div style="text-align:right"> <div style="font-weight:800;color:var(--accent-2)">${c.price}</div> <div style="margin-top:8px"> <button class="enroll-btn" ${isEnrolled ? 'disabled' : ''} onclick="enrollCourse('${c.id}')"> ${isEnrolled ? '<i class="fas fa-check"></i> Enrolled' : 'Enroll'} </button> </div> </div> </div> </div>`;
+        courseList.appendChild(row);
+      });
+      updateAccessArea();
+    }
+
+    function updateAccessArea(){
+      const user = getCurrentUser();
+      if(!user) return hideAccessArea();
+      const enrolled = JSON.parse(localStorage.getItem('fn_enrolled_'+user.email) || '[]');
+      if(enrolled.length === 0) return hideAccessArea();
+      let accessSection = document.getElementById('accessArea');
+      if(!accessSection){
+        accessSection = document.createElement('section');
+        accessSection.id = 'accessArea';
+        accessSection.className = 'card';
+        document.querySelector('main').appendChild(accessSection);
+      }
+      let html = `<h2><i class="fas fa-book-open"></i> Your Courses Access</h2>`;
+      enrolled.forEach(courseId => {
+        const course = COURSES.find(c => c.id === courseId);
+        const resources = COURSE_RESOURCES[courseId];
+        if(!course) return;
+        html += `<div> <h3>${course.title}</h3> <p style="color:var(--muted); font-style: italic;">Instructor: ${course.instructor}</p> <div style="color:#334155; white-space:pre-wrap; background:#eef6ff; border-left:4px solid var(--accent-2); padding:12px; border-radius:8px; margin-bottom:12px;"> ${resources ? resources.notes : 'No additional notes available.'} </div> ${resources && resources.videos.length > 0 ? '<strong>Video Lectures:</strong>' : ''} <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px;">`;
+        if(resources && resources.videos.length > 0){
+          resources.videos.forEach(video => {
+            html += `<div style="flex:1 1 300px; min-width:280px; box-shadow: var(--shadow); border-radius: 10px; overflow:hidden; background:white;"> <iframe width="100%" height="170" src="${video.url}" title="${video.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <div style="padding:8px; font-weight:600; color:var(--accent-2);">${video.title}</div> </div>`;
+          });
+        }
+        html += `</div></div>`;
+      });
+      accessSection.innerHTML = html;
+      accessSection.style.display = 'block';
+    }
+
+    function hideAccessArea(){
+      const area = document.getElementById('accessArea');
+      if(area) area.style.display = 'none';
+    }
+
+    // --- Modals ---
+    function createModal(content, width = '400px') {
+        const modalRoot = document.getElementById('modalRoot');
+        modalRoot.innerHTML = `<div style="position:fixed;inset:0;background:rgba(2,6,23,0.7);display:flex;align-items:center;justify-content:center;z-index:10000; animation: fadeIn 0.3s;" onclick="closeModal()"> <div class="card" style="width:${width}; max-width: 95%; max-height:85vh; overflow-y:auto; padding: 24px;" onclick="event.stopPropagation()"> ${content} </div> </div>`;
+        document.body.style.overflow = 'hidden';
+    }
+
+    function showSignIn(){
+        const content = `
+            <h3 style="margin-top:0;">Sign in</h3>
+            <form id="signInForm"> <label>Email</label> <input id="signInEmail" type="email" required /> <label style="margin-top:12px;">Password</label> <input id="signInPass" type="password" required /> <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;"> <button class="enroll-btn" type="submit">Sign in</button> <button class="enroll-btn" style="background:var(--muted)" type="button" onclick="closeModal()">Cancel</button> </div> </form>`;
+        createModal(content, '360px');
+        document.getElementById('signInForm').onsubmit = function(e){
+            e.preventDefault();
+            const email = document.getElementById('signInEmail').value.trim();
+            const pass = document.getElementById('signInPass').value.trim();
+            if(email && pass){ setCurrentUser({email, name: email.split('@')[0]}); closeModal(); } 
+            else { showCustomAlert('Enter email & password'); }
+        }
+    }
+
+    function showJoin(){
+        const content = `
+            <h3 style="margin-top:0;">Create your Future Nexus account</h3>
+            <form id="joinForm"> <label>Full name</label> <input type="text" id="joinName" required /> <label style="margin-top:12px;">Email</label> <input type="email" id="joinEmail" required /> <label style="margin-top:12px;">Password</label> <input type="password" id="joinPass" required /> <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;"> <button class="enroll-btn" type="submit">Create account</button> <button class="enroll-btn" style="background:var(--muted)" type="button" onclick="closeModal()">Cancel</button> </div> </form>`;
+        createModal(content, '400px');
+        document.getElementById('joinForm').onsubmit = function(e){
+            e.preventDefault();
+            const name = document.getElementById('joinName').value.trim();
+            const email = document.getElementById('joinEmail').value.trim();
+            const pass = document.getElementById('joinPass').value.trim();
+            if(email && pass){ setCurrentUser({name,email}); closeModal(); showOnboardingArea(); showCourses(); } 
+            else { showCustomAlert('Enter email & password'); }
+        }
+    }
+
+    function showProfileModal(){
+      const user = getCurrentUser();
+      if(!user){ showCustomAlert('Please sign in first to view profile'); showSignIn(); return; }
+      const enrolledIds = JSON.parse(localStorage.getItem('fn_enrolled_'+user.email) || '[]');
+      let enrolledCoursesHTML = '<p style="color:var(--muted);">No courses enrolled yet.</p>';
+      if (enrolledIds.length > 0) {
+          enrolledCoursesHTML = enrolledIds.map(id => {
+              const c = COURSES.find(course => course.id === id);
+              if(c) return `<div style="border:1px solid #ddd; background:var(--bg); padding:8px; border-radius:6px; margin-bottom:6px;">${c.title}</div>`;
+              return '';
+          }).join('');
+      }
+      const userInitial = (user.name || user.email)[0].toUpperCase();
+      const content = `
+        <h3 style="margin-top:0; margin-bottom:12px;">Profile: ${user.name || user.email}</h3>
+        <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px;"> <img src="https://placehold.co/100x100/60a5fa/FFFFFF?text=${userInitial}" alt="User Avatar" style="border-radius:50%; width:80px; height:80px; object-fit:cover; box-shadow:0 0 10px var(--accent-2);" /> <div> <p><strong>Email:</strong> ${user.email}</p> <button class="enroll-btn" onclick="closeModal(); showSettingsModal();">Edit Profile</button> </div> </div>
+        <h4>Enrolled Courses</h4> <div id="profileCourses" style="margin-bottom:16px;">${enrolledCoursesHTML}</div>
+        <h4>Profile Badges</h4> <div style="display:flex; gap:10px; flex-wrap:wrap;"> <img src="https://img.icons8.com/color/48/000000/trophy.png" alt="badge" title="Top Performer" /> <img src="https://img.icons8.com/color/48/000000/medal.png" alt="badge" title="Fast Learner" /> <img src="https://img.icons8.com/color/48/000000/star.png" alt="badge" title="Consistent" /> </div>
+        <div style="margin-top:16px; text-align:right;"> <button class="enroll-btn" style="background:var(--muted)" onclick="closeModal()">Close</button> </div>`;
+      createModal(content, '420px');
+    }
+
+    // FINAL COMBINED MENU with DETAILED FEATURES
+    function showFinalMenuModal() {
+        const user = getCurrentUser();
+        const isLoggedIn = !!user;
+        
+        let dashboardHtml = `<p>Please <a href="#" onclick="closeModal(); showSignIn();">sign in</a> to see your dashboard.</p>`;
+        
+        if(isLoggedIn) {
+            const enrolled = JSON.parse(localStorage.getItem('fn_enrolled_'+user.email) || '[]');
+            const enrolledCount = enrolled.length;
+            
+            dashboardHtml = `
+                <h4>Dashboard</h4>
+                <div class="stat-cards">
+                    <div class="stat-card"><h5><i class="fas fa-check-circle"></i> Courses Completed</h5><p>0</p></div>
+                    <div class="stat-card"><h5><i class="fas fa-clock"></i> Hours This Week</h5><p>0</p></div>
+                    <div class="stat-card"><h5><i class="fas fa-fire"></i> Daily Streak</h5><p>0</p></div>
+                </div>
+                <h4>Next Up</h4>
+                <p>${enrolledCount > 0 ? `You have pending tasks in <strong>${COURSES.find(c=>c.id === enrolled[0]).title}</strong>.` : 'No pending tasks.'}</p>
+                <button class="enroll-btn" ${enrolledCount === 0 ? 'disabled' : ''}>Continue Last Lesson</button>
+                <hr style="border:none; border-top: 1px solid #eee; margin: 20px 0;">
+                <h4>Personalized Suggestion</h4>
+                <p>Based on your progress, we recommend you revise <strong>Chapter 2 of Programming Basics</strong>.</p>
+            `;
+        }
+
+        const content = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+                <h3 style="margin:0;">Menu & Dashboard</h3>
+                <button style="border:none; background:transparent; font-size: 24px; cursor:pointer; color: var(--muted);" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="final-menu-layout">
+                <div class="final-menu-sidebar">
+                    <div>
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#" id="menuProfileLink"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                            <li><a href="#" id="menuSettingsLink"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><a href="#" id="menuAboutLink"><i class="fas fa-info-circle"></i> About Us</a></li>
+                            <li><a href="#" id="menuContactLink"><i class="fas fa-headset"></i> Contact Support</a></li>
+                            ${isLoggedIn ? `<li><a href="#" id="menuLogoutLink"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>` : ''}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>My Courses</h4>
+                        <p style="font-size:12px; color:var(--muted); margin-top:0;">What do you want to study today?</p>
+                        <ul>
+                            <li><a href="#">🚀 <strong>DSA</strong><br><span style="font-size:12px;">Master problem solving</span></a></li>
+                            <li><a href="#">👩‍💻 <strong>Web/App Dev</strong><br><span style="font-size:12px;">Beginner-friendly notes</span></a></li>
+                            <li><a href="#">⚡ <strong>Full Stack</strong><br><span style="font-size:12px;">End-to-end projects</span></a></li>
+                            <li><a href="#">📚 <strong>All Courses</strong><br><span style="font-size:12px;">Explore every subject</span></a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4>Language Preference</h4>
+                        <p style="font-size:12px; color: var(--muted); margin-top:0;">Get video recommendations in your language.</p>
+                        <select id="languagePref" style="width:100%; margin-bottom: 10px;">
+                            <option value="en">🌍 English (Global)</option> <option value="hi">🇮🇳 Hindi</option> <option value="te">🌐 Telugu</option> <option value="ta">🌐 Tamil</option> <option value="ml">🌐 Malayalam</option>
+                        </select>
+                        <button class="enroll-btn" id="saveLangPref" style="width:100%;">Save</button>
+                    </div>
+                </div>
+                <div class="final-menu-main">
+                    <div class="tab-menu-container">
+                        <button class="tab-menu-btn active" data-tab="dashboard">Dashboard</button>
+                        <button class="tab-menu-btn" data-tab="interactive">Interactive Content</button>
+                        <button class="tab-menu-btn" data-tab="portfolio">AI Portfolio</button>
+                        <button class="tab-menu-btn" data-tab="feedback">Feedback</button>
+                    </div>
+                    <div id="dashboard" class="tab-content active">${dashboardHtml}</div>
+                    <div id="interactive" class="tab-content">
+                        <h4>Interactive Content Generator</h4>
+                         <div class="tab-menu-container">
+                            <button class="tab-menu-btn active" data-tab="games">Games</button>
+                            <button class="tab-menu-btn" data-tab="mockTests">Mock Tests</button>
+                            <button class="tab-menu-btn" data-tab="quizzes">Quizzes</button>
+                        </div>
+                        <div id="games" class="tab-content active">
+                            <p>Generate fun coding, math, or general knowledge games.</p>
+                            <div class="input-group"><label>Topic</label><input id="gameTopic" type="text" placeholder="e.g., Python Trivia, Basic Algebra"></div>
+                            <button class="enroll-btn" id="generateGameBtn">Generate Game 🎮</button>
+                        </div>
+                        <div id="mockTests" class="tab-content">
+                            <p>Create mock tests with 10-20 MCQ questions and automatic scoring.</p>
+                             <div class="input-group"><label>Topic</label><input id="mockTestTopic" type="text" placeholder="e.g., Data Structures, Digital Logic"></div>
+                             <div class="input-group"><label>Difficulty</label><select id="mockTestLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div>
+                             <button class="enroll-btn" id="generateMockTestBtn">Generate Mock Test 📝</button>
+                        </div>
+                        <div id="quizzes" class="tab-content">
+                            <p>Create short quizzes with mixed question types.</p>
+                            <div class="input-group"><label>Topic</label><input id="quizTopic" type="text" placeholder="e.g., JavaScript Basics, ECE Fundamentals"></div>
+                            <button class="enroll-btn" id="generateQuizBtn">Generate Quiz 🧠</button>
+                        </div>
+                    </div>
+                    <div id="portfolio" class="tab-content">
+                        <h4>AI Portfolio Generator</h4>
+                        <p>Don’t waste time designing! Just upload your resume and we’ll instantly generate a smart portfolio tailored for recruiters and peers.</p>
+                        <label for="resumeUpload" class="upload-box">
+                            📂 Upload Resume (PDF/DOC)
+                        </label>
+                        <input type="file" id="resumeUpload" style="display:none;" />
+                        <div id="generatePortfolioContainer" style="text-align:right; margin-top:10px; display:none;">
+                            <button class="enroll-btn">Generate My Portfolio 🚀</button>
+                        </div>
+                    </div>
+                    <div id="feedback" class="tab-content">
+                        <h4>Send Feedback ❤️</h4>
+                        <form id="feedbackForm">
+                            <div class="input-group">
+                               <label>Feedback Type</label>
+                               <select><option>Suggestion</option><option>Bug Report</option><option>Other</option></select>
+                            </div>
+                            <label>Message</label>
+                            <textarea rows="4" placeholder="Your feedback helps us improve." required></textarea>
+                            <div style="text-align:right; margin-top:10px;"><button class="enroll-btn" type="submit">Submit</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>`;
+        
+        createModal(content, '850px');
+        
+        document.getElementById('menuProfileLink').onclick = (e) => { e.preventDefault(); closeModal(); showProfileModal(); };
+        document.getElementById('menuSettingsLink').onclick = (e) => { e.preventDefault(); closeModal(); showSettingsModal(); };
+        document.getElementById('menuAboutLink').onclick = (e) => { e.preventDefault(); closeModal(); showAboutModal(); };
+        document.getElementById('menuContactLink').onclick = (e) => { e.preventDefault(); closeModal(); showContactModal(); };
+        if (isLoggedIn) {
+            document.getElementById('menuLogoutLink').onclick = (e) => {
+                e.preventDefault();
+                closeModal();
+                showCustomConfirm('Are you sure you want to logout?', logoutAndReset);
+            };
+        }
+        document.getElementById('saveLangPref').onclick = () => {
+            const lang = document.getElementById('languagePref').value;
+            localStorage.setItem('user_lang_pref', lang);
+            showCustomAlert(`Language preference saved to ${lang.toUpperCase()}!`, 'success');
+            closeModal();
+        };
+
+        document.getElementById('resumeUpload').onchange = function() {
+            if (this.files && this.files.length > 0) {
+                document.querySelector('.upload-box').textContent = `✅ ${this.files[0].name} uploaded!`;
+                document.getElementById('generatePortfolioContainer').style.display = 'block';
+            }
+        };
+
+        const mainTabs = document.querySelectorAll('.final-menu-main .tab-menu-container .tab-menu-btn');
+        const mainContents = document.querySelectorAll('.final-menu-main > .tab-content');
+        mainTabs.forEach(button => {
+            button.onclick = () => {
+                mainTabs.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                mainContents.forEach(content => content.classList.remove('active'));
+                document.getElementById(button.dataset.tab).classList.add('active');
+            };
+        });
+        
+        const interactiveTabs = document.querySelectorAll('#interactive .tab-menu-container .tab-menu-btn');
+        const interactiveContents = document.querySelectorAll('#interactive > .tab-content');
+        interactiveTabs.forEach(button => {
+            button.onclick = (e) => {
+                e.stopPropagation();
+                interactiveTabs.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                interactiveContents.forEach(content => content.classList.remove('active'));
+                document.getElementById(button.dataset.tab).classList.add('active');
+            };
+        });
+        
+        document.getElementById('generateGameBtn').onclick = () => generateInteractiveContent('Game');
+        document.getElementById('generateMockTestBtn').onclick = () => generateInteractiveContent('Mock Test');
+        document.getElementById('generateQuizBtn').onclick = () => generateInteractiveContent('Quiz');
+        
+        document.getElementById('feedbackForm').onsubmit = (e) => {
+            e.preventDefault();
+            showCustomAlert('Thank you for your feedback!', 'success');
+            closeModal();
+        }
+    }
+
+    function generateInteractiveContent(type) {
+        const topic = document.getElementById(`${type.toLowerCase().replace(' ','')}Topic`)?.value || 'General Knowledge';
+        showCustomAlert(`Generating ${type} for "${topic}"...`, 'info');
+        
+        const codeContent = `
+            <h4>Generated ${type} Code for "${topic}"</h4>
+            <p>Copy and paste this code into an HTML file to run it.</p>
+            <div class="code-display-box">
+                &lt;!DOCTYPE html&gt;
+                &lt;html&gt;
+                &lt;head&gt;&lt;title&gt;${type}&lt;/title&gt;&lt;/head&gt;
+                &lt;body&gt;
+                    &lt;h1&gt;${topic} ${type}&lt;/h1&gt;
+                    &lt;!-- Interactive content would be here --&gt;
+                    &lt;p&gt;This is a placeholder for the generated ${type.toLowerCase()}.&lt;/p&gt;
+                    &lt;script&gt;
+                        // JavaScript for the ${type.toLowerCase()} would be here
+                    &lt;/script&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </div>
+            <div style="text-align:right; margin-top:10px;"><button class="enroll-btn" onclick="closeModal()">Close</button></div>
+        `;
+        createModal(codeContent, '600px');
+    }
+
+    function showAboutModal(){
+        const content = `<h3 style="margin-top:0;">About Future Nexus</h3> <p><strong>Future Nexus</strong> is an AI-powered learning platform built for students after intermediate, especially B.Tech aspirants.</p> <p>We combine the best features of Udemy and Unacademy, offering:</p> <ul style="padding-left: 20px;"> <li>Free access to quality study material.</li> <li>Personalized learning paths for branches like CSE, ECE, Civil, and more.</li> <li>AI-driven guidance for career and skills.</li> </ul> <p>Our mission is to make learning accessible, smart, and future-ready for every student.</p> <div style="margin-top:20px; text-align:right;"> <button class="enroll-btn" style="background:var(--muted)" onclick="closeModal()">Close</button> </div>`;
+        createModal(content, '500px');
+    }
+
+    function showContactModal(){
+        const content = `<h3 style="margin-top:0;">Contact Us</h3> <p>Have questions? We'd love to hear from you.</p> <div style="margin-bottom: 24px;"> <p><strong>Email:</strong> <a href="mailto:support@futurenexus.com">support@futurenexus.com</a></p> <p><strong>Phone:</strong> +91 98765 43210 (placeholder)</p> <p><strong>Socials:</strong> LinkedIn, Twitter, Instagram</p> </div> <form id="contactForm"> <label>Your Name</label> <input type="text" id="contactName" required /> <label style="margin-top:12px;">Your Email</label> <input type="email" id="contactEmail" required /> <label style="margin-top:12px;">Message</label> <textarea id="contactMessage" rows="4" required></textarea> <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;"> <button class="enroll-btn" type="submit">Send Message</button> <button class="enroll-btn" style="background:var(--muted)" type="button" onclick="closeModal()">Cancel</button> </div> </form>`;
+        createModal(content, '450px');
+        document.getElementById('contactForm').onsubmit = (e) => {
+            e.preventDefault();
+            showCustomAlert(`Thank you! Your message has been received.`, 'success');
+            closeModal();
+        };
+    }
+
+    function showSettingsModal(){
+        const user = getCurrentUser();
+        if(!user){ showCustomAlert('Please sign in to view settings.'); showSignIn(); return; }
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        const content = `
+            <h3 style="margin-top:0;">Settings</h3>
+            <h4>Profile Info</h4> <p><strong>Name:</strong> ${user.name || 'Not set'}</p> <p><strong>Email:</strong> ${user.email}</p>
+            <h4 style="margin-top: 24px;">Theme Preferences</h4> <div style="display:flex; align-items:center; gap: 10px;"> <span>Light / Dark Mode</span> <label class="switch"> <input type="checkbox" id="themeToggle" ${isDarkMode ? 'checked' : ''}> <span class="slider"></span> </label> </div>
+            <h4 style="margin-top: 24px; color: #ef4444;">Account Actions</h4> <button class="enroll-btn" style="background: linear-gradient(45deg, #ef4444, #b91c1c); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);" id="deleteAccountBtn">Delete Account</button> <p style="font-size:12px; color:var(--muted);">This action is permanent and cannot be undone.</p>
+            <div style="margin-top:24px; text-align:right;"> <button class="enroll-btn" style="background:var(--muted)" onclick="closeModal()">Close</button> </div>`;
+        createModal(content, '500px');
+        document.getElementById('themeToggle').addEventListener('change', toggleTheme);
+        document.getElementById('deleteAccountBtn').addEventListener('click', () => {
+            showCustomConfirm('Are you sure you want to delete your account? This is irreversible.', () => {
+                showCustomAlert('Account deleted. Logging out...', 'info');
+                logoutAndReset();
+            });
+        });
+    }
+
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+        } else { localStorage.removeItem('theme'); }
+    }
+    
+    // Grander Effect: Custom Alert and Confirm Modals instead of native browser popups
+    function showCustomAlert(message, type = 'error') {
+      let icon = '<i class="fas fa-times-circle" style="color: #ef4444;"></i>';
+      if (type === 'success') icon = '<i class="fas fa-check-circle" style="color: #22c55e;"></i>';
+      if (type === 'info') icon = '<i class="fas fa-info-circle" style="color: #3b82f6;"></i>';
+
+      const alertContent = `<div style="text-align: center;">
+        <div style="font-size: 40px; margin-bottom: 16px;">${icon}</div>
+        <h4 style="margin: 0 0 10px 0;">${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
+        <p style="margin:0; color:var(--muted);">${message}</p>
+        <button class="enroll-btn" style="margin-top: 20px;" onclick="closeModal()">OK</button>
+      </div>`;
+      createModal(alertContent, '320px');
+    }
+
+    function showCustomConfirm(message, onConfirm) {
+      const confirmContent = `<div style="text-align: center;">
+        <div style="font-size: 40px; margin-bottom: 16px;"><i class="fas fa-question-circle" style="color: #f59e0b;"></i></div>
+        <h4 style="margin: 0 0 10px 0;">Confirmation</h4>
+        <p style="margin:0; color:var(--muted);">${message}</p>
+        <div style="margin-top: 24px; display: flex; justify-content: center; gap: 12px;">
+          <button id="confirmBtnYes" class="enroll-btn">Yes</button>
+          <button class="enroll-btn" style="background: var(--muted);" onclick="closeModal()">Cancel</button>
+        </div>
+      </div>`;
+      createModal(confirmContent, '360px');
+      document.getElementById('confirmBtnYes').onclick = () => {
+        closeModal();
+        onConfirm();
+      };
+    }
+
+    function closeModal(){
+      document.getElementById('modalRoot').innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    // --- Event Listeners ---
+    document.getElementById('menuBtn').addEventListener('click', e => {
+      e.stopPropagation();
+      showFinalMenuModal();
+    });
+
+    document.getElementById('profileBtn').addEventListener('click', e => {
+      e.stopPropagation();
+      showProfileModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+        updateUserUI();
+    });
+  </script>
+</body>
+</html>
